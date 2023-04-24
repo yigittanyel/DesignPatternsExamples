@@ -32,3 +32,16 @@ Structural bir design pattern. <br>
 Araba üretilirken özel yapım mı seri mi vs. belirtmek için sürekli gidip Uretici’nin içi değiştirilmesi gerekir. Bunun yerine strategy isimli bir ara sınıf tanımlanarak bununla üretim tipi belirtlenebilir.<br>
 Futbol maçı da örnek verilebilir. Maç esnasında gol yiyince atak yapmak, öndeyken defansa çekilmek gibi farklı aksiyonlar maç devam ederken yapılır.
 
+## Decorator Design Pattern
+- Structural bir design pattern.
+- Var olan bir class’a mimarisel olarak yeni nitelikler kazandırmayı sağlar. Hali hazırda var olan bir sınıfın işlevini genişletir.<br>
+Örnek olarak;<br>
+Geçmiş zamanlardaki ilk bilgisayarı düşünelim. Daha sonra bu bilgisayarı kalıtım alarak laptoplar geliştirildi. Bu esnada da mevcut bilgisayarın özellikleri genişletilmiş oldu. Örneğin laptopların kapağı kapanınca uyku moduna geçmesi gibi vs. <br>
+Entity framework kullanırken bir kullanıcının her yeni eklenen context için bunları kaydetmenin yanı sıra bunları log olarak da basmak istediğini düşünelim. Buradaki savechanges metodu virtual olarak tanımlandığından bunu override ederek kaydı tamamlamadan önce audit logging işlemleri de eklenilerek var olan işlem genişletilmiş olur.
+
+## Singleton Design Pattern
+-	Objeden yalnızca bir kere yaratıldığından emin olunur.  
+-	Global erişim olur.
+-	Her requestte yeniden oluşturulmaktan ziyade bir kez oluşturulur ve lifetime boyunca bu oluşturulan nesne kullanılır.
+<br>
+Bu yapıda kullanıcıya kendi başına bir nesne yaratma izni verilmez. Kullanıcı bizden sadece nesne talep edebilir ve bizden nesne talep ettiğinde de biz ona her defasında bellekte var olan nesneyi veririz.
