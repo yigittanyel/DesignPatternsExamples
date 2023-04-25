@@ -40,6 +40,7 @@ Geçmiş zamanlardaki ilk bilgisayarı düşünelim. Daha sonra bu bilgisayarı 
 Entity framework kullanırken bir kullanıcının her yeni eklenen context için bunları kaydetmenin yanı sıra bunları log olarak da basmak istediğini düşünelim. Buradaki savechanges metodu virtual olarak tanımlandığından bunu override ederek kaydı tamamlamadan önce audit logging işlemleri de eklenilerek var olan işlem genişletilmiş olur.
 
 ## Singleton Design Pattern
+- Creational Design Pattern
 -	Objeden yalnızca bir kere yaratıldığından emin olunur.  
 -	Global erişim olur.
 -	Her requestte yeniden oluşturulmaktan ziyade bir kez oluşturulur ve lifetime boyunca bu oluşturulan nesne kullanılır.
@@ -51,4 +52,22 @@ Bu yapıda kullanıcıya kendi başına bir nesne yaratma izni verilmez. Kullan�
 - Karmaşık nesne oluşturma işlemlerini daha anlaşılır ve modüler hale getirmeye yardımcı olan bir tasarım kalıbıdır.
 - Örnek olarak oluşturulan bir kullanıcının şirket içi çalışansa mail adresinin sonuna @company.com.tr uzantısı ekle, değilse aynen bırak gibi bir işlem yapılabilir. 
 - C#'da kendiliğinden var olan StringBuilder metodu gibi düşünebiliriz. Orada append yapabiliyoruz. Bu design pattern sayesinde biz de dilediğimiz gibi sonuna başına ekleme yapabilir ve özelleştirmeler yapabiliriz.
+
+## MVC Design Pattern
+- Architectural Design Pattern
+- Veri ve gösterimin soyutlanması esasına dayanır.Böylece veriler(model) ve ui(view) birbirini etkilemeden controller adı verilen ara bileşenle çözümlenir. <br>
+NOT: ASP.Net MVC Framework ile karıştırılmamalıdır. Microsoft henüz yeni kurulduğunda bile bu tasarım deseni mevcuttu. 
+
+## Bridge Design Pattern
+- Structural Design Pattern
+- Bir nesnenin soyutlanmasını ve onunla ilgili gerçekleştirme detaylarını ayırarak esneklik ve genişletilebilirlik sağlar.
+
+## Mediator Design Pattern
+- Behavioral Design Pattern
+- Nesneler arası iletişimi kolaylaştırmak ve düzenlemek için kullanılır. Bu desen bir nesnenin diğer nesnelerle doğrudan iletişim kurmasının yerine aracı bir nesne aracılığıyla iletişim kurulmasını sağlar.<br>
+Uçakları kontrol eden kule gibi düşünebiliriz. Uçaklar kule ile iletişime geçer, kule de onlara ilgili cevabı döner. Bu örnek üzerinde mediator bizim için kuledir.
+<br>Ek Not:
+.Net üzerinde MediaR kütüphanesi bizim için bu işlemi yapar. Yoğunlukla CQRS ile birlikte kullanılır. Bu yapı bize command ve querylerin ayrıştırılmasını sağlar. Bir diğer deyişle manipüle edilen datayla sadece get sorgusu atılan sorguların ayrımını sağlar. Bu da epey performans sağlar. Çünkü bir sisteme günde 10bin get isteği geliyorsa 50 adet post isteği geliyorsa bunları birbirinden ayırarak yönetmek epey performansı arttıracaktır.
+<br>Örnek kod için şu projeye bakabilirsiniz: <br>
+https://github.com/yigittanyel/Onion-Architecture-CQRS-Clean-Architecture-
 
