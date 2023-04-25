@@ -45,3 +45,10 @@ Entity framework kullanırken bir kullanıcının her yeni eklenen context için
 -	Her requestte yeniden oluşturulmaktan ziyade bir kez oluşturulur ve lifetime boyunca bu oluşturulan nesne kullanılır.
 <br>
 Bu yapıda kullanıcıya kendi başına bir nesne yaratma izni verilmez. Kullanıcı bizden sadece nesne talep edebilir ve bizden nesne talep ettiğinde de biz ona her defasında bellekte var olan nesneyi veririz.
+
+## Builder Design Pattern
+- Creational bir pattern.
+- Karmaşık nesne oluşturma işlemlerini daha anlaşılır ve modüler hale getirmeye yardımcı olan bir tasarım kalıbıdır.
+- Örnek olarak oluşturulan bir kullanıcının şirket içi çalışansa mail adresinin sonuna @company.com.tr uzantısı ekle, değilse aynen bırak gibi bir işlem yapılabilir. 
+- C#'da kendiliğinden var olan StringBuilder metodu gibi düşünebiliriz. Orada append yapabiliyoruz. Bu design pattern sayesinde biz de dilediğimiz gibi sonuna başına ekleme yapabilir ve özelleştirmeler yapabiliriz.
+
