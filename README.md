@@ -71,3 +71,57 @@ Uçakları kontrol eden kule gibi düşünebiliriz. Uçaklar kule ile iletişime
 <br>Örnek kod için şu projeye bakabilirsiniz: <br>
 https://github.com/yigittanyel/Onion-Architecture-CQRS-Clean-Architecture-
 
+## CQRS Design Pattern (Command and Query Responsibility Segregation)
+
+- Bir uygulamada komut ve sorgu işlemlerinin sorumluluklarını ayrı ayrı ele alarak uygulamanın performansını ve ölçeklenebilirliğini artırmak için kullanılan bir tasarım desenidir. Bu desen, uygulamanın veritabanında işlem yapan iş mantığının daha iyi ölçeklenmesine ve performansının artırılmasına olanak sağlar.
+- Daha basitçe ifade etmek gerekirse sadece okumak istediğimiz veriler ve manipüle edilen verilerin birbirinden ayrıştırılması prensibine dayanır. Örnek olarak bir sistemde günde 5000 adet get sorgusu atılırken 50 adet post/update sorgusu atılan bir senaryoda bu iki kısmı birbirinden ayrı sistemler olarak tasarlamak, hatta daha yoğun sistemlerde bu verilerin veri tabanlarını bile ayrı tutmak mantıklı olabilir. İşte bu durumlarda başvurulması gereken pattern CQRS'dir.
+
+## Repository Design Pattern
+
+- Repository Design Pattern, veri erişim katmanını soyutlayarak, uygulama katmanındaki kodların veri kaynaklarına erişimini kolaylaştırmayı hedefler.Repository, bir tür veritabanı işlemi yapmak için kullanılan bir nesne kümesidir. Bu nesne kümesi, uygulamanın farklı katmanları arasında veri alışverişini sağlar. Repository Design Pattern, veri kaynaklarına erişmek için bir arabirim sağlar. Bu arabirim, uygulama katmanının veri kaynaklarına erişimini kolaylaştırır ve uygulama kodunun birçok yerinde tekrarlanan kodları engeller.
+
+- Repository Design Pattern, ayrıca kodun daha iyi test edilebilmesini sağlar. Veritabanına yapılan sorguları ve işlemleri bir repository nesnesine taşıdığımızda, bu işlemleri test edebiliriz. Repository, test edilmesi gereken işlevleri soyutlamak için kullanılabilir. Bu nedenle, bir repository kullanmak, test edilebilirlik açısından önemlidir.
+
+- Özetle, Repository Design Pattern, veri kaynaklarına erişimi soyutlayarak, kod tekrarını önlemeye, veri erişimindeki değişiklikleri kolaylaştırmaya ve test edilebilirliği artırmaya yardımcı olur. <br>
+
+.Net’de kod örneği olarak: <br>
+``` 
+public interface IRepository<T> where T : class
+{
+    T GetById(int id);
+    IEnumerable<T> GetAll();
+    void Add(T entity);
+    void Delete(T entity);
+}
+
+Bu bir interface’dir ve CRUD işlemlerini gerçekleştirmek için gereken yöntemleri içerir. Bu interface’in UrunRepository, KategoriRepository ve SiparisRepository sınıfları tarafından uygulanmasını sağlayabiliriz.
+public class UrunRepository : IRepository<Urun>
+{
+    private readonly DbSet<Urun> _dbSet;
+
+    public UrunRepository(DbContext dbContext)
+    {
+        _dbSet = dbContext.Set<Urun>();
+    }
+
+    public Urun GetById(int id)
+    {
+        return _dbSet.Find(id);
+    }
+
+    public IEnumerable<Urun> GetAll()
+    {
+        return _dbSet.ToList();
+    }
+
+    public void Add(Urun entity)
+    {
+        _dbSet.Add(entity);
+    }
+
+    public void Delete(Urun entity)
+    {
+        _dbSet.Remove(entity);
+    }
+}
+``` 
