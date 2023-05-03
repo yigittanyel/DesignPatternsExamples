@@ -167,6 +167,7 @@ public async Task DoDatabaseOperationAsync(CancellationToken cancellationToken)
         }
     }
 }
+
 ''' <br>
 Yukarıdaki kod örneğinde, DoDatabaseOperationAsync metodu veritabanı işlemlerini gerçekleştirir. Bu metot, CancellationToken ile birlikte çağrılır ve kullanıcı işlemi iptal ettiğinde veya belirli bir süre sonra işlem otomatik olarak iptal edildiğinde çalışması durdurulur. İşlemin gerçekleştirildiği UnitOfWork nesnesi, SaveChangesAsync metodu ile veritabanı değişikliklerini kaydeder.
 
