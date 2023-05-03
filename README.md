@@ -143,7 +143,7 @@ Cancellation Token ise, bir işlemi iptal etmek için kullanılan bir yapıdır.
 
 Unit of Work ve Cancellation Token arasında bir ilişki, özellikle uzun süren veritabanı işlemleri için kullanılabilir. Bu senaryoda, Unit of Work deseni kullanılarak tüm işlemler tek bir iş birimi altında toplanır. Daha sonra bu iş birimini, Cancellation Token ile birleştirerek işlemi iptal edebiliriz. Böylece kullanıcının işlemi iptal etmesi durumunda, tüm veritabanı işlemleri geri alınır.
 
-'''
+``` 
 public async Task DoDatabaseOperationAsync(CancellationToken cancellationToken)
 {
     using (var context = new YourDatabaseContext())
@@ -168,7 +168,7 @@ public async Task DoDatabaseOperationAsync(CancellationToken cancellationToken)
     }
 }
 
-''' <br>
+```  <br>
 Yukarıdaki kod örneğinde, DoDatabaseOperationAsync metodu veritabanı işlemlerini gerçekleştirir. Bu metot, CancellationToken ile birlikte çağrılır ve kullanıcı işlemi iptal ettiğinde veya belirli bir süre sonra işlem otomatik olarak iptal edildiğinde çalışması durdurulur. İşlemin gerçekleştirildiği UnitOfWork nesnesi, SaveChangesAsync metodu ile veritabanı değişikliklerini kaydeder.
 
 Transaction, tüm veritabanı işlemlerini tek bir transaction altında toplar. Böylece tüm işlemlerin başarılı bir şekilde tamamlanması veya tamamen geri alınması sağlanır. Hata durumunda, transaction geri alınır ve hata fırlatılır.
