@@ -125,3 +125,49 @@ public class UrunRepository : IRepository<Urun>
     }
 }
 ``` 
+## UOW Design Pattern
+
+- Unit Of Work
+- Unit of Work design pattern, bir uygulamanın veritabanı işlemlerinin koordinasyonunu sağlamak için kullanılan bir yapıdır. Bu desen, bir işlem sırasında yapılacak tüm veritabanı işlemlerini tek bir iş birimi (unit of work) altında toplar ve bu iş birimini, tüm işlemler başarılı bir şekilde tamamlanana kadar işlem sonlandırılmaz.
+
+C# için bir örnek vermek gerekirse, bir öğrenci kayıt sistemi düşünelim. Bu sisteme yeni öğrenciler eklenebilir, mevcut öğrenci bilgileri güncellenebilir veya silinebilir. Bu işlemler için ayrı ayrı veritabanı işlemleri yapmak yerine, Unit of Work desenini kullanarak tüm işlemleri tek bir iş birimi altında toplayabiliriz.
+
+BURAYA repository pattern ve uow örneği gelecek
+
+- EXTRA : UOW - Cancellation Token İlişkisi <br>
+Unit of Work ve Cancellation Token, uygulamanın farklı yönlerinde farklı amaçlar için kullanılırlar. Ancak bazı senaryolarda birbirleriyle ilişkilendirilebilirler.
+
+Unit of Work, bir işlem sırasında gerçekleştirilecek tüm veritabanı işlemlerini tek bir iş birimi (unit of work) altında toplar. Bu sayede tüm işlemlerin başarılı bir şekilde tamamlanması sağlanır veya işlem tamamen geri alınır. Bu desen, uygulamanın veritabanı işlemlerinin koordinasyonunu sağlamak için kullanılır.
+
+Cancellation Token ise, bir işlemi iptal etmek için kullanılan bir yapıdır. Bu yapı sayesinde bir işlem sırasında kullanıcı iptal isteği gönderebilir veya belirli bir süreden sonra işlem otomatik olarak iptal edilebilir. Bu yapı, asenkron işlemlerde özellikle kullanışlıdır.
+
+Unit of Work ve Cancellation Token arasında bir ilişki, özellikle uzun süren veritabanı işlemleri için kullanılabilir. Bu senaryoda, Unit of Work deseni kullanılarak tüm işlemler tek bir iş birimi altında toplanır. Daha sonra bu iş birimini, Cancellation Token ile birleştirerek işlemi iptal edebiliriz. Böylece kullanıcının işlemi iptal etmesi durumunda, tüm veritabanı işlemleri geri alınır.
+
+'''
+public async Task DoDatabaseOperationAsync(CancellationToken cancellationToken)
+{
+    using (var context = new YourDatabaseContext())
+    {
+        using (var transaction = context.Database.BeginTransaction())
+        {
+            try
+            {
+                var unitOfWork = new UnitOfWork(context);
+
+                // Veritabanı işlemleri burada yapılır
+
+                await unitOfWork.SaveChangesAsync(cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                throw ex;
+            }
+        }
+    }
+}
+''' <br>
+Yukarıdaki kod örneğinde, DoDatabaseOperationAsync metodu veritabanı işlemlerini gerçekleştirir. Bu metot, CancellationToken ile birlikte çağrılır ve kullanıcı işlemi iptal ettiğinde veya belirli bir süre sonra işlem otomatik olarak iptal edildiğinde çalışması durdurulur. İşlemin gerçekleştirildiği UnitOfWork nesnesi, SaveChangesAsync metodu ile veritabanı değişikliklerini kaydeder.
+
+Transaction, tüm veritabanı işlemlerini tek bir transaction altında toplar. Böylece tüm işlemlerin başarılı bir şekilde tamamlanması veya tamamen geri alınması sağlanır. Hata durumunda, transaction geri alınır ve hata fırlatılır.
