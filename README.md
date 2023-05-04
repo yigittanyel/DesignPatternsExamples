@@ -132,9 +132,7 @@ public class UrunRepository : IRepository<Urun>
 
 C# için bir örnek vermek gerekirse, bir öğrenci kayıt sistemi düşünelim. Bu sisteme yeni öğrenciler eklenebilir, mevcut öğrenci bilgileri güncellenebilir veya silinebilir. Bu işlemler için ayrı ayrı veritabanı işlemleri yapmak yerine, Unit of Work desenini kullanarak tüm işlemleri tek bir iş birimi altında toplayabiliriz.
 
-- NOT: IUnitOfWork arayüzü IDisposable arayüzünden türetiliyor, çünkü UnitOfWork sınıfı, özellikle veritabanı bağlantısı ve diğer kaynaklar gibi sınıfın dışarıya açtığı kaynakları kullanırken kaynakları temizlemek için kullanılması gereken yöntem olan Dispose() yöntemini uyguluyor.
-
-IDisposable arayüzünü uygulayan bir nesneyi kullanmayı bitirdikten sonra, kaynakları derhal temizlemek için Dispose() yöntemini çağırmak iyi bir uygulama yöntemidir. Bu şekilde, kaynaklar kapatılmadığından dolayı oluşabilecek bellek sızıntılarını önleyebiliriz. Bu nedenle, UnitOfWork sınıfı, IDisposable arayüzünü uygular ve nesnesi kullanımdan kaldırıldığında Dispose() yöntemini çağırarak kaynakları serbest bırakır. IUnitOfWork arayüzü de bu nedenle IDisposable arayüzünden türetilir.
+- NOT: IUnitOfWork arayüzü IDisposable arayüzünden türetiliyor, çünkü UnitOfWork sınıfı, özellikle veritabanı bağlantısı ve diğer kaynaklar gibi sınıfın dışarıya açtığı kaynakları kullanırken kaynakları temizlemek için kullanılması gereken yöntem olan Dispose() yöntemini uyguluyor.IDisposable arayüzünü uygulayan bir nesneyi kullanmayı bitirdikten sonra, kaynakları derhal temizlemek için Dispose() yöntemini çağırmak iyi bir uygulama yöntemidir. Bu şekilde, kaynaklar kapatılmadığından dolayı oluşabilecek bellek sızıntılarını önleyebiliriz. Bu nedenle, UnitOfWork sınıfı, IDisposable arayüzünü uygular ve nesnesi kullanımdan kaldırıldığında Dispose() yöntemini çağırarak kaynakları serbest bırakır. IUnitOfWork arayüzü de bu nedenle IDisposable arayüzünden türetilir.
 
 
 - EXTRA : <br> UOW - Cancellation Token İlişkisi <hr>
