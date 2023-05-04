@@ -132,9 +132,12 @@ public class UrunRepository : IRepository<Urun>
 
 C# için bir örnek vermek gerekirse, bir öğrenci kayıt sistemi düşünelim. Bu sisteme yeni öğrenciler eklenebilir, mevcut öğrenci bilgileri güncellenebilir veya silinebilir. Bu işlemler için ayrı ayrı veritabanı işlemleri yapmak yerine, Unit of Work desenini kullanarak tüm işlemleri tek bir iş birimi altında toplayabiliriz.
 
-BURAYA repository pattern ve uow örneği gelecek
+- NOT: IUnitOfWork arayüzü IDisposable arayüzünden türetiliyor, çünkü UnitOfWork sınıfı, özellikle veritabanı bağlantısı ve diğer kaynaklar gibi sınıfın dışarıya açtığı kaynakları kullanırken kaynakları temizlemek için kullanılması gereken yöntem olan Dispose() yöntemini uyguluyor.
 
-- EXTRA : UOW - Cancellation Token İlişkisi <br>
+IDisposable arayüzünü uygulayan bir nesneyi kullanmayı bitirdikten sonra, kaynakları derhal temizlemek için Dispose() yöntemini çağırmak iyi bir uygulama yöntemidir. Bu şekilde, kaynaklar kapatılmadığından dolayı oluşabilecek bellek sızıntılarını önleyebiliriz. Bu nedenle, UnitOfWork sınıfı, IDisposable arayüzünü uygular ve nesnesi kullanımdan kaldırıldığında Dispose() yöntemini çağırarak kaynakları serbest bırakır. IUnitOfWork arayüzü de bu nedenle IDisposable arayüzünden türetilir.
+
+
+- EXTRA : <br> UOW - Cancellation Token İlişkisi <hr>
 Unit of Work ve Cancellation Token, uygulamanın farklı yönlerinde farklı amaçlar için kullanılırlar. Ancak bazı senaryolarda birbirleriyle ilişkilendirilebilirler.
 
 Unit of Work, bir işlem sırasında gerçekleştirilecek tüm veritabanı işlemlerini tek bir iş birimi (unit of work) altında toplar. Bu sayede tüm işlemlerin başarılı bir şekilde tamamlanması sağlanır veya işlem tamamen geri alınır. Bu desen, uygulamanın veritabanı işlemlerinin koordinasyonunu sağlamak için kullanılır.
@@ -170,6 +173,6 @@ public async Task DoDatabaseOperationAsync(CancellationToken cancellationToken)
 
 ```  
 <br>
-Yukarıdaki kod örneğinde, DoDatabaseOperationAsync metodu veritabanı işlemlerini gerçekleştirir. Bu metot, CancellationToken ile birlikte çağrılır ve kullanıcı işlemi iptal ettiğinde veya belirli bir süre sonra işlem otomatik olarak iptal edildiğinde çalışması durdurulur. İşlemin gerçekleştirildiği UnitOfWork nesnesi, SaveChangesAsync metodu ile veritabanı değişikliklerini kaydeder.
+- Yukarıdaki kod örneğinde, DoDatabaseOperationAsync metodu veritabanı işlemlerini gerçekleştirir. Bu metot, CancellationToken ile birlikte çağrılır ve kullanıcı işlemi iptal ettiğinde veya belirli bir süre sonra işlem otomatik olarak iptal edildiğinde çalışması durdurulur. İşlemin gerçekleştirildiği UnitOfWork nesnesi, SaveChangesAsync metodu ile veritabanı değişikliklerini kaydeder.
 
 Transaction, tüm veritabanı işlemlerini tek bir transaction altında toplar. Böylece tüm işlemlerin başarılı bir şekilde tamamlanması veya tamamen geri alınması sağlanır. Hata durumunda, transaction geri alınır ve hata fırlatılır.
