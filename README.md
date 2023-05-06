@@ -2,7 +2,7 @@
 
 ## Observer Design Pattern
 -	Behavioral (Davranışsal) bir pattern 
--	Gözlemci, izleyici, gözetmen anlamına gelir. X nesnesinin y özelliğinde bir manipülasyon yapıldığında x nesnesini izleyen-gözleyen diğer a,b,c vb. gibi nesnelere yeni state’i bildiren tasarım desenidir.
+-	Gözlemci, izleyici, gözetmen anlamına gelir. X nesnesinin y özelliğinde bir manipülasyon yapıldığında x nesnesini izleyen-gözleyen diğer a,b,c vb. gibi nesnelere yeni state’i bildiren tasarım desenidir.<br>
 Örnek olarak;<br>
 Öğrenci – Okul – Veli -> Öğrenci okulu astığında okul tarafından aileye bilgi gitmesi.<br>
 E-Ticaret Sistemleri -> Bir ürün stokta kalmadığı zaman stoka gelince haber verme sistemi
@@ -15,12 +15,12 @@ Observer - > Birden fazla nesne takip ettiği zaman bu tiplere arayüz görevi g
 -	Structural (Yapısal) bir design pattern.
 -	Bir nesneyi temsil eden bir başka nesne kullanılarak erişim olmasını sağlar. Böylece asıl nesnenin consumer tarafından direkt erişimine izin verilmez, istenilen işlemler için aracı olan nesne yani Proxy kullanılır. 
 -	Kısaca, istemci ve gerçek nesne arasında bir aracı eklenerek güvenlik ve kontrol mekanizması sağlanır.<br>
-Örnek olarak;
+Örnek olarak;<br>
 Bir bankadan para çekilmesi işlemi için ara bir Proxy oluşturularak bankadaki işlemleri yalnızca login olan kullanıcıların yapması sağlanabilir.<br>
 Loglama yapılırken bir ara Proxy oluşturularak 5 logdan daha az log geldiğinde yazdırmayıp toplu log bastırma işlemi yapılabilir.
 
 ## Adapter Design Pattern
-Structural bir design pattern. <br>
+- Structural bir design pattern. <br>
 Örneğin bankadan bir para çekme yatırma işlemimiz olsun. Bu işlem için bazı bankalardan xml dönüyor bazılarından json dönüyor. Biz bu işlem için bir adaptör oluşturarak gelen veriye göre işlem yapılmasını sağlayabiliriz.
 
 ## Strategy Design Pattern
@@ -28,7 +28,7 @@ Structural bir design pattern. <br>
 -	Nesnenin farklı durumlarına veya gereksinimlerine uyacak şekilde değişiklikleri runtime’da yapmayı sağlar. 
 -	Uygulama seviyesinde değişiklikler yapılmadan istenilen değişikliğin elde edilmesini sağlar. 
 -	Genişleyen ve gelişen bir uygulama yapısı içinde esnek ve ölçeklenebilir bir tasarım sağlamak için önemlidir.<br>
-Örnek olarak ;
+Örnek olarak ;<br>
 Araba üretilirken özel yapım mı seri mi vs. belirtmek için sürekli gidip Uretici’nin içi değiştirilmesi gerekir. Bunun yerine strategy isimli bir ara sınıf tanımlanarak bununla üretim tipi belirtlenebilir.<br>
 Futbol maçı da örnek verilebilir. Maç esnasında gol yiyince atak yapmak, öndeyken defansa çekilmek gibi farklı aksiyonlar maç devam ederken yapılır.
 
@@ -50,8 +50,9 @@ Bu yapıda kullanıcıya kendi başına bir nesne yaratma izni verilmez. Kullan�
 ## Builder Design Pattern
 - Creational bir pattern.
 - Karmaşık nesne oluşturma işlemlerini daha anlaşılır ve modüler hale getirmeye yardımcı olan bir tasarım kalıbıdır.
-- Örnek olarak oluşturulan bir kullanıcının şirket içi çalışansa mail adresinin sonuna @company.com.tr uzantısı ekle, değilse aynen bırak gibi bir işlem yapılabilir. 
 - C#'da kendiliğinden var olan StringBuilder metodu gibi düşünebiliriz. Orada append yapabiliyoruz. Bu design pattern sayesinde biz de dilediğimiz gibi sonuna başına ekleme yapabilir ve özelleştirmeler yapabiliriz.
+<br>
+ Örnek olarak oluşturulan bir kullanıcının şirket içi çalışansa mail adresinin sonuna @company.com.tr uzantısı ekle, değilse aynen bırak gibi bir işlem yapılabilir. 
 
 ## MVC Design Pattern
 - Architectural Design Pattern
@@ -66,7 +67,7 @@ NOT: ASP.Net MVC Framework ile karıştırılmamalıdır. Microsoft henüz yeni 
 - Behavioral Design Pattern
 - Nesneler arası iletişimi kolaylaştırmak ve düzenlemek için kullanılır. Bu desen bir nesnenin diğer nesnelerle doğrudan iletişim kurmasının yerine aracı bir nesne aracılığıyla iletişim kurulmasını sağlar.<br>
 Uçakları kontrol eden kule gibi düşünebiliriz. Uçaklar kule ile iletişime geçer, kule de onlara ilgili cevabı döner. Bu örnek üzerinde mediator bizim için kuledir.
-<br>Ek Not:
+<br>Ek Not:<hr>
 .Net üzerinde MediaR kütüphanesi bizim için bu işlemi yapar. Yoğunlukla CQRS ile birlikte kullanılır. Bu yapı bize command ve querylerin ayrıştırılmasını sağlar. Bir diğer deyişle manipüle edilen datayla sadece get sorgusu atılan sorguların ayrımını sağlar. Bu da epey performans sağlar. Çünkü bir sisteme günde 10bin get isteği geliyorsa 50 adet post isteği geliyorsa bunları birbirinden ayırarak yönetmek epey performansı arttıracaktır.
 <br>Örnek kod için şu projeye bakabilirsiniz: <br>
 https://github.com/yigittanyel/Onion-Architecture-CQRS-Clean-Architecture-
@@ -81,8 +82,8 @@ https://github.com/yigittanyel/Onion-Architecture-CQRS-Clean-Architecture-
 - Repository Design Pattern, veri erişim katmanını soyutlayarak, uygulama katmanındaki kodların veri kaynaklarına erişimini kolaylaştırmayı hedefler.Repository, bir tür veritabanı işlemi yapmak için kullanılan bir nesne kümesidir. Bu nesne kümesi, uygulamanın farklı katmanları arasında veri alışverişini sağlar. Repository Design Pattern, veri kaynaklarına erişmek için bir arabirim sağlar. Bu arabirim, uygulama katmanının veri kaynaklarına erişimini kolaylaştırır ve uygulama kodunun birçok yerinde tekrarlanan kodları engeller.
 
 - Repository Design Pattern, ayrıca kodun daha iyi test edilebilmesini sağlar. Veritabanına yapılan sorguları ve işlemleri bir repository nesnesine taşıdığımızda, bu işlemleri test edebiliriz. Repository, test edilmesi gereken işlevleri soyutlamak için kullanılabilir. Bu nedenle, bir repository kullanmak, test edilebilirlik açısından önemlidir.
-
-- Özetle, Repository Design Pattern, veri kaynaklarına erişimi soyutlayarak, kod tekrarını önlemeye, veri erişimindeki değişiklikleri kolaylaştırmaya ve test edilebilirliği artırmaya yardımcı olur. <br>
+<br>
+Özetle, Repository Design Pattern, veri kaynaklarına erişimi soyutlayarak, kod tekrarını önlemeye, veri erişimindeki değişiklikleri kolaylaştırmaya ve test edilebilirliği artırmaya yardımcı olur. <br>
 
 .Net’de kod örneği olarak: <br>
 ``` 
@@ -129,13 +130,13 @@ public class UrunRepository : IRepository<Urun>
 
 - Unit Of Work
 - Unit of Work design pattern, bir uygulamanın veritabanı işlemlerinin koordinasyonunu sağlamak için kullanılan bir yapıdır. Bu desen, bir işlem sırasında yapılacak tüm veritabanı işlemlerini tek bir iş birimi (unit of work) altında toplar ve bu iş birimini, tüm işlemler başarılı bir şekilde tamamlanana kadar işlem sonlandırılmaz.
-
+<br>
 C# için bir örnek vermek gerekirse, bir öğrenci kayıt sistemi düşünelim. Bu sisteme yeni öğrenciler eklenebilir, mevcut öğrenci bilgileri güncellenebilir veya silinebilir. Bu işlemler için ayrı ayrı veritabanı işlemleri yapmak yerine, Unit of Work desenini kullanarak tüm işlemleri tek bir iş birimi altında toplayabiliriz.
+<br>
+- NOT: <hr> IUnitOfWork arayüzü IDisposable arayüzünden türetiliyor, çünkü UnitOfWork sınıfı, özellikle veritabanı bağlantısı ve diğer kaynaklar gibi sınıfın dışarıya açtığı kaynakları kullanırken kaynakları temizlemek için kullanılması gereken yöntem olan Dispose() yöntemini uyguluyor.IDisposable arayüzünü uygulayan bir nesneyi kullanmayı bitirdikten sonra, kaynakları derhal temizlemek için Dispose() yöntemini çağırmak iyi bir uygulama yöntemidir. Bu şekilde, kaynaklar kapatılmadığından dolayı oluşabilecek bellek sızıntılarını önleyebiliriz. Bu nedenle, UnitOfWork sınıfı, IDisposable arayüzünü uygular ve nesnesi kullanımdan kaldırıldığında Dispose() yöntemini çağırarak kaynakları serbest bırakır. IUnitOfWork arayüzü de bu nedenle IDisposable arayüzünden türetilir.
 
-- NOT: IUnitOfWork arayüzü IDisposable arayüzünden türetiliyor, çünkü UnitOfWork sınıfı, özellikle veritabanı bağlantısı ve diğer kaynaklar gibi sınıfın dışarıya açtığı kaynakları kullanırken kaynakları temizlemek için kullanılması gereken yöntem olan Dispose() yöntemini uyguluyor.IDisposable arayüzünü uygulayan bir nesneyi kullanmayı bitirdikten sonra, kaynakları derhal temizlemek için Dispose() yöntemini çağırmak iyi bir uygulama yöntemidir. Bu şekilde, kaynaklar kapatılmadığından dolayı oluşabilecek bellek sızıntılarını önleyebiliriz. Bu nedenle, UnitOfWork sınıfı, IDisposable arayüzünü uygular ve nesnesi kullanımdan kaldırıldığında Dispose() yöntemini çağırarak kaynakları serbest bırakır. IUnitOfWork arayüzü de bu nedenle IDisposable arayüzünden türetilir.
-
-
-- EXTRA : <br> UOW - Cancellation Token İlişkisi <hr>
+<br>
+- EXTRA : UOW - Cancellation Token İlişkisi <hr>
 Unit of Work ve Cancellation Token, uygulamanın farklı yönlerinde farklı amaçlar için kullanılırlar. Ancak bazı senaryolarda birbirleriyle ilişkilendirilebilirler.
 
 Unit of Work, bir işlem sırasında gerçekleştirilecek tüm veritabanı işlemlerini tek bir iş birimi (unit of work) altında toplar. Bu sayede tüm işlemlerin başarılı bir şekilde tamamlanması sağlanır veya işlem tamamen geri alınır. Bu desen, uygulamanın veritabanı işlemlerinin koordinasyonunu sağlamak için kullanılır.
@@ -171,6 +172,6 @@ public async Task DoDatabaseOperationAsync(CancellationToken cancellationToken)
 
 ```  
 <br>
-- Yukarıdaki kod örneğinde, DoDatabaseOperationAsync metodu veritabanı işlemlerini gerçekleştirir. Bu metot, CancellationToken ile birlikte çağrılır ve kullanıcı işlemi iptal ettiğinde veya belirli bir süre sonra işlem otomatik olarak iptal edildiğinde çalışması durdurulur. İşlemin gerçekleştirildiği UnitOfWork nesnesi, SaveChangesAsync metodu ile veritabanı değişikliklerini kaydeder.
+Yukarıdaki kod örneğinde, DoDatabaseOperationAsync metodu veritabanı işlemlerini gerçekleştirir. Bu metot, CancellationToken ile birlikte çağrılır ve kullanıcı işlemi iptal ettiğinde veya belirli bir süre sonra işlem otomatik olarak iptal edildiğinde çalışması durdurulur. İşlemin gerçekleştirildiği UnitOfWork nesnesi, SaveChangesAsync metodu ile veritabanı değişikliklerini kaydeder.
 
 Transaction, tüm veritabanı işlemlerini tek bir transaction altında toplar. Böylece tüm işlemlerin başarılı bir şekilde tamamlanması veya tamamen geri alınması sağlanır. Hata durumunda, transaction geri alınır ve hata fırlatılır.
